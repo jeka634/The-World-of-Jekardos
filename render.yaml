@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: world-of-jekardos
+    runtime: node
+    buildCommand: npm install --production=false && npm run prebuild && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: HOST
+        value: 0.0.0.0
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_BOT_USERNAME
+        sync: false
+      - key: DATABASE_URL
+        value: sqlite:./database.sqlite
+      - key: JWT_SECRET
+        generateValue: true
+    healthCheckPath: /api/health
+    autoDeploy: true
